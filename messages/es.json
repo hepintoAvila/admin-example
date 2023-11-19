@@ -1,9 +1,9 @@
 {
-  "admin-example.navigation.label-group": "Admins de ejemplo",
-  "admin-example.navigation.label-table": "Ejemplo de tabela",
-  "admin-example.navigation.search.kws": "teste, mock, fake",
-  "admin-example.navigation.details.search.kws": "detalhe, mock, test, oi",
-  "admin-example.navigation.table.search.kws": "tabela, mock, test, tchau",
-  "admin-example.hello-world": "Admin de ejemplo",
-  "admin-example.details": "Página de detalles"
+  "admin-gift-cards.navigation.label-group": "Admin Gift Cards",
+  "admin-gift-cards.navigation.label-table": "Admin Gift Cards de tabela",
+  "admin-gift-cards.navigation.search.kws": "teste, mock, fake",
+  "admin-gift-cards.navigation.details.search.kws": "detalhe, mock, test, oi",
+  "admin-gift-cards.navigation.table.search.kws": "tabela, mock, test, tchau",
+  "admin-gift-cards.hello-world": "Admin de ejemplo",
+  "admin-gift-cards.details": "Página de detalles"
 }

@@ -8,7 +8,7 @@ const AdminExampleDetail: FC<Props> = ({ params }) => {
   return (
     <Layout
       pageHeader={
-        <PageHeader title={<FormattedMessage id="admin-example.details" />} />
+        <PageHeader title={<FormattedMessage id="admin-gift-cards.details" />} />
       }
     >
       <PageBlock variation="full">

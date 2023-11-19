@@ -6,12 +6,12 @@ import UsersTable from './UsersTable'
 
 import './styles.global.css'
 
-const AdminExample: FC = () => {
+const AdminGiftCards: FC = () => {
   return (
     <Layout
       pageHeader={
         <PageHeader
-          title={<FormattedMessage id="admin-example.hello-world" />}
+          title={<FormattedMessage id="admin-gift-cards.hello-world" />}
         />
       }
     >
@@ -22,4 +22,4 @@ const AdminExample: FC = () => {
   )
 }
 
-export default AdminExample
+export default AdminGiftCards

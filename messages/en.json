@@ -1,9 +1,9 @@
 {
-  "admin-example.navigation.label-group": "Example admins",
-  "admin-example.navigation.label-table": "Example table",
-  "admin-example.navigation.search.kws": "test, mock, fake",
-  "admin-example.navigation.details.search.kws": "details, mock, test, hello",
-  "admin-example.navigation.table.search.kws": "table, mock, test, bye",
-  "admin-example.hello-world": "Example Admin",
-  "admin-example.details": "Details page"
+  "admin-gift-cards.navigation.label-group": "Admin Gift Cards",
+  "admin-gift-cards.navigation.label-table": "Admin Gift Cards table",
+  "admin-gift-cards.navigation.search.kws": "test, mock, fake",
+  "admin-gift-cards.navigation.details.search.kws": "details, mock, test, hello",
+  "admin-gift-cards.navigation.table.search.kws": "table, mock, test, bye",
+  "admin-gift-cards.hello-world": "Admin Gift Cards Admin",
+  "admin-gift-cards.details": "Details page"
 }

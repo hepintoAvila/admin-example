@@ -5,8 +5,10 @@ import {
   IconArrowDown,
   IconShoppingCart,
   Input,
+  Dropzone,
 } from 'vtex.styleguide'
 import faker from 'faker'
+import XLSX from 'xlsx'
 import { withRuntimeContext } from 'vtex.render-runtime'
 
 const EXAMPLE_LENGTH = 100
@@ -22,6 +24,9 @@ interface Props {
 }
 
 class UsersTable extends Component<Props> {
+
+  private emails: any = []
+
   constructor(props: any) {
     super(props)
     this.state = {
@@ -29,7 +34,10 @@ class UsersTable extends Component<Props> {
       tableDensity: 'low',
       searchValue: null,
       filterStatements: [],
+      files: null,
+      result: null
     }
+    this.handleFile = this.handleFile.bind(this)
   }
 
   private getSchema() {
@@ -98,9 +106,8 @@ class UsersTable extends Component<Props> {
           // you should treat empty object cases only for alwaysVisibleFilters
           return 'Any'
         }
-        return `${
-          st.verb === '=' ? 'is' : st.verb === '!=' ? 'is not' : 'contains'
-        } ${st.object}`
+        return `${st.verb === '=' ? 'is' : st.verb === '!=' ? 'is not' : 'contains'
+          } ${st.object}`
       },
       verbs: [
         {
@@ -131,12 +138,83 @@ class UsersTable extends Component<Props> {
     }
   }
 
+  processWb = (() => {
+    const toJson = function toJson(workbook: any) {
+      const result: any = {}
+
+      workbook.SheetNames.forEach((sheetName: any) => {
+        const roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
+          header: 1,
+        })
+
+        if (roa.length) result[sheetName] = roa
+      })
+
+      return result
+    }
+
+    return (wb: any) => {
+      let output: any = null
+
+      output = toJson(wb)
+
+      return output
+    }
+  })()
+
+  private doFile([f]: any) {
+    const reader: any = new FileReader()
+
+    reader.onload = async (e: any) => {
+      let data = e.target.result
+
+      data = new Uint8Array(data)
+      const result = this.processWb(XLSX.read(data, { type: 'array' }))
+      const [sheetName] = Object.getOwnPropertyNames(result)
+
+      result[sheetName].splice(0, 1)
+      this.emails = result[sheetName]
+      this.emails = this.emails.filter((item: any) => item.length)
+      this.emails.forEach((p: any) => {
+        p[0] = (p[0] || '').toString().trim()
+        p[1] = (p[1] || '').toString().trim()
+      })
+      console.log(this.emails)
+      const response = await fetch('/_v/create-gift-cards', {
+        method: 'POST',
+        body: JSON.stringify({
+          emails: this.emails,
+        })
+      })
+      console.log(response)
+    }
+
+    reader.onerror = () => {
+      // error
+    }
+
+    reader.readAsArrayBuffer(f)
+  }
+
+  private handleFile(files: any) {
+    console.log(files)
+    this.doFile(files)
+    this.setState({ result: files })
+  }
+
+  private handleReset(files: any) {
+    if (files) {
+      console.log(files)
+    }
+  }
+
   public render() {
     const {
       items,
       searchValue,
       filterStatements,
       tableDensity,
+      result
     }: any = this.state
     const {
       runtime: { navigate },
@@ -144,6 +222,30 @@ class UsersTable extends Component<Props> {
 
     return (
       <div>
+        <div>
+          <Dropzone
+            onDropAccepted={this.handleFile}
+            onFileReset={this.handleReset}
+            accept=".xls,.xlsx"
+          >
+            <div className="pt7">
+              <div>
+                <span className="f4">Drop here your XLS or </span>
+                <span className="f4 c-link" style={{ cursor: 'pointer' }}>
+                  choose a file
+                </span>
+              </div>
+            </div>
+          </Dropzone>
+          {result && (
+            <div className="mt4">
+              <p className="ttu f6">Result:</p>
+              <pre className="bg-black-025 pa4 f7">
+                {JSON.stringify(result, null, 2)}
+              </pre>
+            </div>
+          )}
+        </div>
         <Table
           fullWidth
           updateTableKey={tableDensity}
@@ -171,7 +273,7 @@ class UsersTable extends Component<Props> {
               onChange: (value: string) =>
                 this.setState({ searchValue: value }),
               onClear: () => this.setState({ searchValue: null }),
-              onSubmit: () => {},
+              onSubmit: () => { },
             },
             download: {
               label: 'Export',

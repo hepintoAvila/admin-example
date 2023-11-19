@@ -1,13 +1,13 @@
 {
   "section": "orders",
-  "titleId": "admin-example.navigation.label-group",
+  "titleId": "admin-gift-cards.navigation.label-group",
   "subSection": "example",
-  "searchKeyWordsHelpers": "admin-example.navigation.search.kws",
+  "searchKeyWordsHelpers": "admin-gift-cards.navigation.search.kws",
   "subSectionItems": [
     {
-      "labelId": "admin-example.navigation.label-table",
+      "labelId": "admin-gift-cards.navigation.label-table",
       "path": "/admin/example",
-      "searchKeyWordsHelpers": "admin-example.navigation.table.search.kws"
+      "searchKeyWordsHelpers": "admin-gift-cards.navigation.table.search.kws"
     }
   ]
 }
