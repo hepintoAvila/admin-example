@@ -1,10 +1,10 @@
 {
-  "admin.app.example": {
-    "component": "AdminExample",
-    "path": "/admin/app/example"
+  "admin.app.admingiftcards": {
+    "component": "AdminGiftCards",
+    "path": "/admin/app/giftcards"
   },
-  "admin.app.example-detail": {
-    "component": "AdminExampleDetail",
-    "path": "/admin/app/example/:id"
+  "admin.app.admingiftcards-detail": {
+    "component": "AdminGiftCardsDetail",
+    "path": "/admin/app/giftcards/:id"
   }
 }
